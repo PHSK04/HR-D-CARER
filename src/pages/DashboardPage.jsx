@@ -37,6 +37,7 @@ import {
 import Logo from '../components/Logo.jsx'
 import DatasetsPage from './DatasetsPage.jsx'
 import LearningHubPage from './LearningHubPage.jsx'
+import TopRiskDatasetsPage from './TopRiskDatasetsPage.jsx'
 
 const primaryStats = [
   {
@@ -520,9 +521,9 @@ function DashboardPage({ initialNav = 'Dashboard', onLogout }) {
             </span>
           </button>
 
-          <div className={`nav-group ${activeNav === 'Datasets' ? 'open' : ''}`}>
+          <div className={`nav-group ${['Datasets', 'TopRiskDatasets'].includes(activeNav) ? 'open' : ''}`}>
             <button
-              className={activeNav === 'Datasets' ? 'active-parent' : ''}
+              className={['Datasets', 'TopRiskDatasets'].includes(activeNav) ? 'active-parent' : ''}
               type="button"
               onClick={() => {
                 setActiveNav('Datasets')
@@ -546,6 +547,17 @@ function DashboardPage({ initialNav = 'Dashboard', onLogout }) {
             >
               <span />
               Datasets
+            </button>
+            <button
+              className={`nav-subitem risk-subitem ${activeNav === 'TopRiskDatasets' ? 'active' : ''}`}
+              type="button"
+              onClick={() => {
+                setActiveNav('TopRiskDatasets')
+                notify('เปิด Top 10 Data Quality Risk Datasets')
+              }}
+            >
+              <span />
+              Top 10 Data Quality Risk Datasets
             </button>
           </div>
 
@@ -694,6 +706,8 @@ function DashboardPage({ initialNav = 'Dashboard', onLogout }) {
         <div className="dashboard-content">
           {activeNav === 'Datasets' ? (
             <DatasetsPage notify={notify} />
+          ) : activeNav === 'TopRiskDatasets' ? (
+            <TopRiskDatasetsPage />
           ) : activeNav === 'LearningHub' ? (
             <LearningHubPage lesson={activeLesson} onSelectLesson={setActiveLesson} />
           ) : (
