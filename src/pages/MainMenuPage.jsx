@@ -54,7 +54,7 @@ const menuItems = [
   {
     icon: Settings,
     title: 'Settings',
-    target: 'Dashboard',
+    target: 'Settings',
   },
 ]
 
