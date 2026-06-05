@@ -36,6 +36,7 @@ import {
 } from 'lucide-react'
 import Logo from '../components/Logo.jsx'
 import DatasetsPage from './DatasetsPage.jsx'
+import LearningHubPage from './LearningHubPage.jsx'
 
 const primaryStats = [
   {
@@ -134,6 +135,14 @@ const quickActions = [
   { icon: Upload, title: 'อัปโหลดข้อมูล', sub: 'นำเข้าข้อมูลเพื่อตรวจสอบคุณภาพ' },
   { icon: Download, title: 'รายงานคุณภาพ', sub: 'ดาวน์โหลดรายงาน' },
   { icon: BookOpen, title: 'คู่มือการใช้งาน', sub: 'เรียนรู้วิธีการใช้งานระบบ' },
+]
+
+const learningHubItems = [
+  { id: 'ep01', title: 'EP01: วิธีคีย์ข้อมูลพนักงาน' },
+  { id: 'ep02', title: 'EP02: วิธีแก้ข้อมูลตำแหน่ง' },
+  { id: 'ep03', title: 'EP03: วิธีตรวจสอบข้อมูลผิด' },
+  { id: 'ep04', title: 'EP04: วิธีส่งหลักฐานการแก้ไข' },
+  { id: 'faq', title: 'FAQ / Download Master Data' },
 ]
 
 const thaiMonths = [
@@ -469,6 +478,8 @@ function DashboardPage({ initialNav = 'Dashboard', onLogout }) {
   const [theme, setTheme] = useState('light')
   const [datePickerOpen, setDatePickerOpen] = useState(false)
   const [profileOpen, setProfileOpen] = useState(false)
+  const [learningHubOpen, setLearningHubOpen] = useState(false)
+  const [activeLesson, setActiveLesson] = useState('ep01')
   const [dateRange, setDateRange] = useState({
     start: '2024-04-25',
     end: '2024-05-24',
@@ -480,6 +491,11 @@ function DashboardPage({ initialNav = 'Dashboard', onLogout }) {
     setNotice(message)
     window.clearTimeout(window.hrDcareNoticeTimer)
     window.hrDcareNoticeTimer = window.setTimeout(() => setNotice(''), 1800)
+  }
+
+  const logout = () => {
+    setProfileOpen(false)
+    onLogout()
   }
 
   const isDark = theme === 'dark'
@@ -552,17 +568,40 @@ function DashboardPage({ initialNav = 'Dashboard', onLogout }) {
               <strong>Cleansing Roadmap & Status</strong>
             </span>
           </button>
-          <button
-            type="button"
-            onClick={() => notify('เปิดเมนู Learning Hub')}
-          >
-            <BookOpen size={24} />
-            <span>
-              <strong>Learning Hub / คู่มือการใช้งาน</strong>
-              <small>การใช้งานข้อมูล</small>
-            </span>
-            <ChevronRight size={18} />
-          </button>
+          <div className={`nav-group learning-nav ${learningHubOpen ? 'open' : ''}`}>
+            <button
+              type="button"
+              onClick={() => {
+                setLearningHubOpen((current) => !current)
+                notify('เปิดเมนู Learning Hub')
+              }}
+            >
+              <BookOpen size={24} />
+              <span>
+                <strong>Learning Hub / คู่มือการใช้งาน</strong>
+                <small>การใช้งานข้อมูล</small>
+              </span>
+              <ChevronDown size={18} />
+            </button>
+            {learningHubOpen && (
+              <div className="sidebar-learning-submenu">
+                {learningHubItems.map((item) => (
+                  <button
+                    className={activeNav === 'LearningHub' && activeLesson === item.id ? 'active' : ''}
+                    key={item.id}
+                    type="button"
+                    onClick={() => {
+                      setActiveNav('LearningHub')
+                      setActiveLesson(item.id)
+                      notify(item.title)
+                    }}
+                  >
+                    {item.title}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
           <button
             type="button"
             onClick={() => notify('เปิด Audit Log')}
@@ -632,16 +671,21 @@ function DashboardPage({ initialNav = 'Dashboard', onLogout }) {
                   <strong>Pimmat Limsuwan</strong>
                   <span>pimmat.lim@pea.co.th</span>
                 </div>
-                <button
-                  type="button"
-                  onClick={() => {
-                    notify('กลับไปหน้าเข้าสู่ระบบ')
-                    window.setTimeout(onLogout, 280)
+                <div
+                  className="top-profile-logout"
+                  role="button"
+                  tabIndex={0}
+                  onClick={logout}
+                  onKeyDown={(event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                      event.preventDefault()
+                      logout()
+                    }
                   }}
                 >
                   <LogOut size={19} />
                   ออกจากระบบ
-                </button>
+                </div>
               </div>
             </div>
           </div>
@@ -650,6 +694,8 @@ function DashboardPage({ initialNav = 'Dashboard', onLogout }) {
         <div className="dashboard-content">
           {activeNav === 'Datasets' ? (
             <DatasetsPage notify={notify} />
+          ) : activeNav === 'LearningHub' ? (
+            <LearningHubPage lesson={activeLesson} onSelectLesson={setActiveLesson} />
           ) : (
             <>
           <div className="page-heading">
