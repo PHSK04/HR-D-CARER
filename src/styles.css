@@ -1967,9 +1967,7 @@ input:focus-visible {
 
 .learning-video-panel {
   padding: 20px;
-  display: grid;
-  grid-template-columns: minmax(0, 1.65fr) minmax(280px, 0.75fr);
-  gap: 24px;
+  display: block;
 }
 
 .video-frame {
