@@ -983,6 +983,12 @@ input:focus-visible {
   font-weight: 950;
 }
 
+.sidebar nav .risk-subitem {
+  min-height: 72px;
+  line-height: 1.25;
+  white-space: normal;
+}
+
 .sidebar nav .nav-subitem span {
   width: 6px;
   height: 6px;
@@ -1684,6 +1690,252 @@ input:focus-visible {
   display: grid;
   gap: 25px;
   animation: riseIn 420ms ease both;
+}
+
+.top-risk-page {
+  animation: riseIn 420ms ease both;
+}
+
+.top-risk-card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.top-risk-head {
+  min-height: 118px;
+  padding: 28px 31px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.top-risk-head h1 {
+  margin: 0;
+  color: #111a34;
+  font-size: 1.55rem;
+  line-height: 1.18;
+  font-weight: 950;
+}
+
+.top-risk-head p {
+  margin: 12px 0 0;
+  color: #657086;
+  font-size: 1rem;
+  font-weight: 750;
+}
+
+.top-risk-tools {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.top-risk-tools label,
+.top-risk-tools button {
+  min-height: 52px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #dfe4ef;
+  border-radius: 8px;
+  background: #fff;
+  font-weight: 900;
+}
+
+.top-risk-tools label {
+  width: 290px;
+  padding: 0 16px;
+  color: #6b748a;
+}
+
+.top-risk-tools input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  color: #111a34;
+  background: transparent;
+  font-weight: 650;
+}
+
+.top-risk-tools button {
+  padding: 0 20px;
+  color: #293453;
+}
+
+.top-risk-tools button:last-child {
+  color: #6d28d9;
+  border-color: rgba(124, 58, 237, 0.45);
+}
+
+.top-risk-table {
+  padding: 0 31px;
+}
+
+.top-risk-table-head,
+.top-risk-row {
+  display: grid;
+  grid-template-columns: minmax(260px, 1.2fr) minmax(270px, 0.95fr) 120px 36px;
+  align-items: center;
+  column-gap: 26px;
+}
+
+.top-risk-table-head {
+  min-height: 64px;
+  padding: 0 22px;
+  border: 1px solid #e7e3f4;
+  border-radius: 8px;
+  color: #5b21d6;
+  background: #fbfaff;
+  font-size: 0.82rem;
+  font-weight: 950;
+}
+
+.top-risk-table-head span:nth-child(2) {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.top-risk-row {
+  width: 100%;
+  min-height: 68px;
+  padding: 0 8px;
+  border-bottom: 1px solid #e5e8ef;
+  color: #111a34;
+  background: #fff;
+  text-align: left;
+}
+
+.top-risk-row:hover {
+  background: #fbfaff;
+}
+
+.top-risk-icon {
+  width: 43px;
+  height: 43px;
+  display: grid;
+  place-items: center;
+  grid-column: 1;
+  grid-row: 1;
+  border-radius: 8px;
+  color: #7c3aed;
+  background: #f0e9ff;
+}
+
+.top-risk-row strong {
+  grid-column: 1;
+  grid-row: 1;
+  margin-left: 72px;
+  font-weight: 950;
+}
+
+.top-risk-score {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 72px;
+  align-items: center;
+  gap: 22px;
+}
+
+.top-risk-score > span {
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e7e9ef;
+}
+
+.top-risk-score i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+}
+
+.top-risk-score i.critical {
+  background: #f31546;
+}
+
+.top-risk-score i.warning {
+  background: #f59e0b;
+}
+
+.top-risk-score i.good {
+  background: #22c55e;
+}
+
+.top-risk-score b {
+  color: #111a34;
+  font-weight: 950;
+}
+
+.top-risk-row em {
+  width: max-content;
+  min-width: 45px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  font-style: normal;
+  font-weight: 950;
+  text-align: center;
+}
+
+.top-risk-row em.critical {
+  color: #f31546;
+  background: #ffe4ec;
+}
+
+.top-risk-row em.warning {
+  color: #f59e0b;
+  background: #fff3d6;
+}
+
+.top-risk-row em.good {
+  color: #16a34a;
+  background: #dcfce7;
+}
+
+.top-risk-row > svg {
+  color: #33415f;
+}
+
+.top-risk-pagination {
+  min-height: 92px;
+  padding: 0 31px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  color: #657086;
+  font-weight: 750;
+}
+
+.top-risk-pagination > div {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.top-risk-pagination button {
+  min-width: 45px;
+  min-height: 45px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid #dfe4ef;
+  border-radius: 8px;
+  color: #293453;
+  background: #fff;
+  font-weight: 900;
+}
+
+.top-risk-pagination button.active {
+  color: #6d28d9;
+  border-color: rgba(124, 58, 237, 0.45);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.08);
+}
+
+.top-risk-pagination button:last-child {
+  padding: 0 16px;
 }
 
 /* หน้า Learning Hub */
