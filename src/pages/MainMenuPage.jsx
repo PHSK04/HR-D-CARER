@@ -6,11 +6,9 @@ import {
   CircleAlert,
   FileText,
   Home,
-  LogOut,
   Map,
   Network,
   Settings,
-  User,
 } from 'lucide-react'
 import Logo from '../components/Logo.jsx'
 
@@ -60,10 +58,9 @@ const menuItems = [
   },
 ]
 
-function MainMenuPage({ onEnter, onLogout }) {
+function MainMenuPage({ onEnter }) {
   const [systemMenuOpen, setSystemMenuOpen] = useState(false)
   const [learningHubOpen, setLearningHubOpen] = useState(false)
-  const [profileOpen, setProfileOpen] = useState(false)
 
   return (
     <main className="menu-page">
@@ -155,34 +152,6 @@ function MainMenuPage({ onEnter, onLogout }) {
             )
           })}
         </nav>
-        <div className="menu-profile">
-          <button
-            className="menu-profile-button"
-            type="button"
-            aria-expanded={profileOpen}
-            onClick={() => setProfileOpen((current) => !current)}
-          >
-            <span className="menu-profile-avatar">
-              <User size={36} />
-            </span>
-            <strong>
-              Pimnatt Limsuwan
-              <small>System Administrator</small>
-            </strong>
-            <ChevronDown size={24} />
-          </button>
-
-          <div className={`menu-profile-popover ${profileOpen ? 'show' : ''}`}>
-            <div>
-              <strong>Pimmat Limsuwan</strong>
-              <span>pimmat.lim@pea.co.th</span>
-            </div>
-            <button type="button" onClick={onLogout}>
-              <LogOut size={21} />
-              ออกจากระบบ
-            </button>
-          </div>
-        </div>
         <footer>
           <strong>Version 2.1.0</strong>
           <span>© 2026 HR D-CARE</span>
