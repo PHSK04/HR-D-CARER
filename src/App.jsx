@@ -18,7 +18,6 @@ function App() {
           setInitialNav(nav)
           setScreen('dashboard')
         }}
-        onLogout={() => setScreen('login')}
       />
     )
   }
