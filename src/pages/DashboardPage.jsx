@@ -37,6 +37,7 @@ import {
 import Logo from '../components/Logo.jsx'
 import DatasetsPage from './DatasetsPage.jsx'
 import LearningHubPage from './LearningHubPage.jsx'
+import SettingsPage from './Settings.jsx'
 import TopRiskDatasetsPage from './TopRiskDatasetsPage.jsx'
 
 const primaryStats = [
@@ -624,8 +625,12 @@ function DashboardPage({ initialNav = 'Dashboard', onLogout }) {
             </span>
           </button>
           <button
+            className={activeNav === 'Settings' ? 'active' : ''}
             type="button"
-            onClick={() => notify('เปิด Settings')}
+            onClick={() => {
+              setActiveNav('Settings')
+              notify('เปิด Settings')
+            }}
           >
             <Settings size={24} />
             <span>
@@ -710,6 +715,8 @@ function DashboardPage({ initialNav = 'Dashboard', onLogout }) {
             <TopRiskDatasetsPage />
           ) : activeNav === 'LearningHub' ? (
             <LearningHubPage lesson={activeLesson} onSelectLesson={setActiveLesson} />
+          ) : activeNav === 'Settings' ? (
+            <SettingsPage notify={notify} />
           ) : (
             <>
           <div className="page-heading">
